@@ -24,7 +24,7 @@ function promptAndValidate(question) {
 
 // Function to determine custom response based on user's answer
 function getCustomResponse(question, userResponse) {
-    if (normalizeInput(userResponse) === "y" || normalizeInput(userResponse)=== "yes")  {
+    if (normalizeInput(userResponse) === "y" || normalizeInput(userResponse) === "yes") {
         switch (normalizeInput(question)) {
             case "can i help fit you on a bicycle? size matters. (y/n)":
                 return "Dope. I'll get my bike guru out from the back to help you.";
@@ -35,29 +35,50 @@ function getCustomResponse(question, userResponse) {
             case "are you a bot? (yes/no)":
                 return "BLEEP BLEEP";
             case "do you think? (y/n)":
-                return "Therefore you are.";
-            
+                return "Therefore you are";
         }
     } else {
         switch (normalizeInput(question)) {
             case "can i help fit you on a bicycle? size matters. (y/n)":
                 return "Good. My bike guy has the day off.";
             case "do you like garlic in general? (yes/no)":
-                return "GET OUT VAMPIRE!.";
+                return "GET OUT VAMPIRE!";
             case "do you think the earth is flat? (y/n)":
                 return "WHEW! That's a relief.";
             case "are you a bot? (yes/no)":
                 return "Too bad.I was hoping you'd cache the shop.";
             case "do you think? (y/n)":
                 return "Got it. You're a chair than can read and type.";
+            case "How many times do you think I've eaten foie gras?":
+                return "Therefore you are.";
             default:
                 return "Custom response for 'n' answer.";
         }
     }
 }
 
-let userName = prompt("What is your name?");
-alert("Hello, " + userName + "! Nice to meet you. My name is Ryan. Welcome to my shop.");
+// Function for the 6th question
+function guessFoieGras() {
+    const correctAnswer = 1;
+    let attempts = 4;
+    while (attempts > 0) {
+        let guess = prompt("How many times do you think I've eaten foie gras?");
+        if (parseInt(guess) === correctAnswer) {
+            alert("Correct!");
+            return; // End the function if the guess is correct
+        } else if (parseInt(guess) > correctAnswer) {
+            alert("Too high! Try again.");
+        } else {
+            alert("Too low! Try again.");
+        }
+        attempts--;
+    }
+    // If all attempts are used up, reveal the correct answer
+    alert("Sorry, you've used all your attempts. The correct answer is " + correctAnswer + ".");
+}
+
+// Start the game for the 6th question
+guessFoieGras();
 
 // Array of questions
 let questions = [
@@ -74,39 +95,3 @@ for (let i = 0; i < questions.length; i++) {
     let customResponse = getCustomResponse(questions[i], userResponse);
     alert(customResponse);
 }
-
- // Define a global array to represent the deck of cards
- var deck = [];
-
- // Fill the deck with standard playing cards (without jokers)
- function initializeDeck() {
-     var suits = ['♠', '♣', '♥', '♦'];
-     var ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
-
-     for (var i = 0; i < suits.length; i++) {
-         for (var j = 0; j < ranks.length; j++) {
-             deck.push(ranks[j] + suits[i]);
-         }
-     }
- }
-
- // Deal 5 random cards from the deck
- function dealCards() {
-     // Clear previous cards
-     var cardContainer = document.getElementById("cardContainer");
-     cardContainer.innerHTML = "";
-
-     // Shuffle the deck
-     shuffle(deck);
-
-     // Display the first 5 cards
-     for (var i = 0; i < 5; i++) {
-         var cardElement = document.createElement("div");
-         cardElement.textContent = deck[i];
-         cardElement.classList.add("card");
-         cardContainer.appendChild(cardElement);
-     }
-
-     // Log the dealt cards to console
-     console.log("Dealt cards:", deck.slice(0, 5));
- }
