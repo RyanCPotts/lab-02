@@ -74,3 +74,39 @@ for (let i = 0; i < questions.length; i++) {
     let customResponse = getCustomResponse(questions[i], userResponse);
     alert(customResponse);
 }
+
+ // Define a global array to represent the deck of cards
+ var deck = [];
+
+ // Fill the deck with standard playing cards (without jokers)
+ function initializeDeck() {
+     var suits = ['♠', '♣', '♥', '♦'];
+     var ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+
+     for (var i = 0; i < suits.length; i++) {
+         for (var j = 0; j < ranks.length; j++) {
+             deck.push(ranks[j] + suits[i]);
+         }
+     }
+ }
+
+ // Deal 5 random cards from the deck
+ function dealCards() {
+     // Clear previous cards
+     var cardContainer = document.getElementById("cardContainer");
+     cardContainer.innerHTML = "";
+
+     // Shuffle the deck
+     shuffle(deck);
+
+     // Display the first 5 cards
+     for (var i = 0; i < 5; i++) {
+         var cardElement = document.createElement("div");
+         cardElement.textContent = deck[i];
+         cardElement.classList.add("card");
+         cardContainer.appendChild(cardElement);
+     }
+
+     // Log the dealt cards to console
+     console.log("Dealt cards:", deck.slice(0, 5));
+ }

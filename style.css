@@ -35,7 +35,20 @@ body {background-color: lightblue;}
 .future-plans {
     font-weight: bold;
     color: green;
+    border: 2px solid black; /* Add a border with 2px width and solid black color */
+    padding: 10px; /* Add padding inside the box */
+    margin: 10px; /* Add margin around the box */
 }
 
 footer {text-align: center
     ;}
+
+    #dealButtonSection {
+        /* Your CSS styles here */
+        /* For example: */
+        text-align: center;
+        margin-top: 20px;
+    }
+    <section id="dealButtonSection">
+    <button onclick="dealCards()">Deal Cards</button>
+</section>
