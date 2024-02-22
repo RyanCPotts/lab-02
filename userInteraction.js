@@ -51,6 +51,8 @@ function getCustomResponse(question, userResponse) {
                 return "Got it. You're a chair than can read and type.";
             case "How many times do you think I've eaten foie gras?":
                 return "Therefore you are.";
+            case "what is one of my favorite foods?":
+                return "That's correct!";
             default:
                 return "Custom response for 'n' answer.";
         }
@@ -65,7 +67,7 @@ function guessFoieGras() {
         let guess = prompt("How many times do you think I've eaten foie gras?");
         if (parseInt(guess) === correctAnswer) {
             alert("Correct!");
-            return; // End the function if the guess is correct
+            return true; // Return true if the guess is correct
         } else if (parseInt(guess) > correctAnswer) {
             alert("Too high! Try again.");
         } else {
@@ -75,10 +77,14 @@ function guessFoieGras() {
     }
     // If all attempts are used up, reveal the correct answer
     alert("Sorry, you've used all your attempts. The correct answer is " + correctAnswer + ".");
+    return false; // Return false if the guess is incorrect or attempts are exhausted
 }
 
 // Start the game for the 6th question
-guessFoieGras();
+let score = 0;
+if (guessFoieGras()) {
+    score++;
+}
 
 // Array of questions
 let questions = [
@@ -87,6 +93,7 @@ let questions = [
     "Do you think the Earth is flat? (y/n)",
     "Are you a bot? (yes/no)",
     "Do you think? (y/n)",
+    // "What is one of my favorite foods?",
 ];
 
 // Iterate through each question
@@ -94,4 +101,38 @@ for (let i = 0; i < questions.length; i++) {
     let userResponse = promptAndValidate(questions[i]);
     let customResponse = getCustomResponse(questions[i], userResponse);
     alert(customResponse);
+    if (customResponse === "That's correct!") {
+        score++;
+    }
 }
+
+// Display the final score
+alert("You got " + score + " out of 7 questions correct.");
+
+
+// Function for the 7th question
+function guessFavoriteFood() {
+	const possibleAnswers = ["steak", "fish", "ribs", "salad", "mac'n'cheese", "pickled okra"];
+	let attempts = 6;
+	let userCorrect = false
+	while (attempts > 0) {
+		let guess = prompt("What is one of my favorite foods?").toLowerCase();
+		console.log(guess)
+		if (possibleAnswers.includes(guess)) {
+			alert("Correct! " + guess + " is one of my favorite foods.");
+			userCorrect = true
+
+			attempts = 0
+		} else {
+			alert("Nope, try again.");
+		}
+		attempts--;
+	}
+	// If all attempts are used up, reveal the correct answers
+	if (userCorrect == false){
+		alert("Sorry, you've used all your attempts. My favorite foods are: " + possibleAnswers.join(", "));
+	}
+
+}
+
+guessFavoriteFood()
